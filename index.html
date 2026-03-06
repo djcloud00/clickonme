@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Birthday Magic</title>
+
+<style>
+
+body{
+margin:0;
+overflow:hidden;
+background:#0b0c1c;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+font-family:Georgia,serif;
+color:white;
+flex-direction:column;
+}
+  #heart{
+font-size:90px;
+cursor:pointer;
+animation:glow 1.5s infinite alternate;
+}
+
+@keyframes glow{
+from{
+text-shadow:0 0 10px #ff0033;
+}
+to{
+text-shadow:0 0 40px #ff0033,0 0 60px #ff0033;
+}
+}
+  #message{
+display:none;
+font-size:28px;
+max-width:600px;
+text-align:center;
+line-height:1.6;
+}
+
+/* floating hearts */
+
+.heart{
+position:absolute;
+font-size:25px;
+animation:floatUp 5s linear forwards;
+}
+  @keyframes floatUp{
+0%{
+transform:translateY(0);
+opacity:1;
+}
+
+100%{
+transform:translateY(-800px);
+opacity:0;
+}
+}
+
+</style>
+</head>
+
+<body>
+  <div id="heart" onclick="startMagic()">❤️</div>
+
+<div id="message"></div>
+
+<script>
+
+const text=`It's strange and beautiful
+to think about how someone so precious 
+came into my life so quietly. 
+What started as a small moment turned 
+into memories, feelings, and a bond I never knew I needed. 💖`;
+
+let i=0;
+  function startMagic(){
+
+document.getElementById("heart").style.display="none";
+document.getElementById("message").style.display="block";
+
+typeWriter();
+
+}
+
+function typeWriter(){
+
+if(i<text.length){
+
+document.getElementById("message").innerHTML+=text.charAt(i);
+
+i++;
+
+setTimeout(typeWriter,80);
+}
+else{
+
+startHearts();
+
+}
+
+}
+
+function startHearts(){
+
+setInterval(()=>{
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerText=["💗","💖","💞","💕"][Math.floor(Math.random()*4)];
+  heart.style.left=Math.random()*window.innerWidth+"px";
+
+heart.style.fontSize=(20+Math.random()*40)+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+
+heart.remove();
+
+},5000);
+
+},250);
+
+}
+
+</script>
+</body>
+</html>
