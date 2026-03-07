@@ -34,7 +34,8 @@ text-shadow:0 0 40px #ff0033,0 0 60px #ff0033;
   #message{
 display:none;
 font-size:28px;
-
+overflow-y:auto;
+whitespace:pre-line;
 max-width:600px;
 text-align:center;
 line-height:1.6;
@@ -115,13 +116,18 @@ typeWriter();
 
 function typeWriter(){
 
-if(i<text.length){
+if(i < text.length){
 
-document.getElementById("message").innerHTML+=text.charAt(i);
+document.getElementById("message").innerHTML += text.charAt(i);
 
 i++;
 
-setTimeout(typeWriter,80);
+/* AUTO SCROLL */
+document.getElementById("message").scrollTop =
+document.getElementById("message").scrollHeight;
+
+setTimeout(typeWriter, 80);
+
 }
 else{
 
